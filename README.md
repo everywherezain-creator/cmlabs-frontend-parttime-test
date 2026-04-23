@@ -123,3 +123,6 @@ Ikuti instruksi sampai deploy selesai.
 
 - Detail Meal  
   `https://www.themealdb.com/api/json/v1/1/lookup.php?i={meal-id}`
+
+## DOMAIN HASIL DEPLOY
+https://cmlabs-frontend-parttime-test-56nzyjllb.vercel.app/
