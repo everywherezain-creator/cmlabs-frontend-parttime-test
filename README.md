@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meal Explorer - Practical Test
 
-## Getting Started
+Aplikasi web berbasis **Next.js** untuk eksplorasi data makanan dari [TheMealDB](https://www.themealdb.com/), mencakup:
+- daftar ingredients,
+- daftar meal berdasarkan ingredient,
+- dan detail meal (bonus).
 
-First, run the development server:
+Project ini dibuat untuk memenuhi kebutuhan practical test frontend dengan fokus pada:
+- dynamic routing,
+- search di sisi frontend,
+- atomic component (atom, molecule, organism),
+- UI modern dan responsive.
 
+## Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **Library**: React, TypeScript
+- **Styling**: Tailwind CSS
+- **API Source**: TheMealDB
+
+## Fitur Utama
+
+### 1) Halaman Ingredients (`/ingredients`)
+- Menampilkan list ingredients dari endpoint:
+  - `https://www.themealdb.com/api/json/v1/1/list.php?i=list`
+- Search ingredient by name (frontend).
+- Pagination (6 item per halaman).
+- Setiap ingredient memiliki gambar dan deskripsi singkat.
+- Klik item ingredient akan menuju halaman detail ingredient.
+
+### 2) Halaman Ingredients Detail (`/ingredients/[ingredientName]`)
+- Parameter: `ingredientName`
+- Menampilkan list meal berdasarkan ingredient terpilih dari endpoint:
+  - `https://www.themealdb.com/api/json/v1/1/filter.php?i={ingredient-name}`
+- Search meal by name (frontend).
+- Klik meal akan menuju halaman detail meal.
+
+### 3) Halaman Meals Detail (`/meals/[mealId]`) - Bonus
+- Parameter: `mealId`
+- Menampilkan detail meal dari endpoint:
+  - `https://www.themealdb.com/api/json/v1/1/lookup.php?i={meal-id}`
+- Menampilkan:
+  - gambar meal,
+  - nama/judul meal,
+  - tutorial/instructions,
+  - list recipe (ingredient + takaran),
+  - YouTube embedded (jika tersedia).
+
+## Struktur Komponen (Atomic)
+
+- `src/components/atoms`
+  - `SearchInput.tsx`
+- `src/components/molecules`
+  - `IngredientList.tsx`
+  - `MealList.tsx`
+- `src/components/organisms`
+  - `MealAppHeader.tsx`
+
+## Menjalankan Project di Lokal
+
+### Prasyarat
+- Node.js 18+ (disarankan versi terbaru LTS)
+- npm
+
+### Install dependency
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Jalankan mode development
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Buka browser ke:
+- [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Lint
+```bash
+npm run lint
+```
 
-## Learn More
+### Build production
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Jalankan build production
+```bash
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Catatan Konfigurasi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `next.config.ts` sudah mengizinkan remote image dari `www.themealdb.com`.
+- Indicator Next.js pada mode development sudah dimatikan (`devIndicators: false`).
 
-## Deploy on Vercel
+## Deploy ke Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Cara cepat (via dashboard)
+1. Push project ke GitHub.
+2. Login ke [Vercel](https://vercel.com/).
+3. Klik **Add New Project**.
+4. Import repository.
+5. Build setting default Next.js (tanpa konfigurasi khusus tambahan).
+6. Klik **Deploy**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Cara via CLI (opsional)
+```bash
+npm i -g vercel
+vercel
+```
+
+Ikuti instruksi sampai deploy selesai.
+
+## Endpoint API yang Digunakan
+
+- List Ingredients  
+  `https://www.themealdb.com/api/json/v1/1/list.php?i=list`
+
+- Filter by Ingredient  
+  `https://www.themealdb.com/api/json/v1/1/filter.php?i={ingredient-name}`
+
+- Detail Meal  
+  `https://www.themealdb.com/api/json/v1/1/lookup.php?i={meal-id}`
